@@ -9,48 +9,52 @@
 </head>
 
 <body>
-    <div align="center">
-    <form action="form.php" method="POST">
-        <div align="center" class="recuadro" style="width: 30rem;height: 40rem;">
-            <label class="form-label" for="form2Example2">nombre</label>
-          <div class="nombre" style="margin-bottom: 2rem;">
-            <input type="text" id="form-control" class="form-control" name="nombre"/>
-            
-          </div>
-          <label class="form-label" for="form2Example2">Apellido</label>
-          <div class="apellido" style="margin-bottom: 2rem;">
-            <input type="text" id="form-control" class="form-control" name="apellido"/>
-           
-          </div>
-          <label class="form-label" for="form2Example2">Usuario</label>
-          <div class="usuario" style="margin-bottom: 2rem;">
-            <input type="text" id="form-control" class="form-control" name="usuario"/>
-            
-          </div>
-          <label class="form-label" for="form2Example2">Password</label>
-          <div class="pwd" style="margin-bottom: 2rem;">
-            <input type="password" id="form-control" class="form-control" name="pwd"/>
-            
-          </div>
-
-            <label class="form-label" for="form2Example1">Email address</label>
-          <div class="email" style="margin-bottom: 2rem;">
-            <input type="email" id="form-control" class="form-control" name="email"/>
-            
-          </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
-
-    </div>
-
-          </div>
+<center>
 
 
-        </div>
+<table class="table table-dark">
+    <form action="actualizar.php" method="POST">
+  <thead>
+  <tr>
+  <th scope="col">#</th>
+      <th scope="col">Correo</th>
+      <th scope="col">Usuario</th>
+      <th scope="col">Operación</th>
+      <th scope="col"></th>
+    </tr>
+    
+    <?php
+    $id = $_GET["id"];
+    $sql="SELECT * FROM login WHERE id = '$id'";
+    $resultado = $conexion->query($query);
+    
+    
+    while($mostrar=mysqli_fetch_array($result)){
+    ?>
 
+   
+  </thead>
+  <tbody>
+  <tr>
+        <td scope="row"><input name="id" value="<?php echo $mostrar['id']?>" ></td>
+        <td><input type="text" name="correo" value="<?php echo $mostrar['mail']?>"></td>
+        <td><input type="text" name="usuario" value="<?php echo $mostrar['usuario']?>"></td>
+        <td><input type="text" name="pwd" value="<?php echo $mostrar['pwd']?>"></td>
+        <td><input type="text" name="nombre" value="<?php echo $mostrar['nombre']?>"></td>
+        <td><input type="text" name="apellido" value="<?php echo $mostrar['apellido']?>"></td>
 
+        <td><button type="submit" value="Actualizar"  class="btn btn-outline-success">ACTUALIZAR</button></td>
 
-      </form>
-    </div>
-</div>
+       </tr>
+    <?php 
+    }
+    ?>
+  </tbody>
+  </form>
+</table>
+
+</center>
+
+    
 </body>
 </html>

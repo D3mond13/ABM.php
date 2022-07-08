@@ -13,33 +13,45 @@
 </head>
 <body>
     <center>
-    <table class="table table-dark  ">
+    <table class="table table-dark">
+    <form action="actualizar.php" method="POST">
   <thead>
-    <tr>
-      <th scope="col">id</th>
-      <th scope="col">nombre</th>
-      <th scope="col">apellido</th>
-      <th scope="col">usuario</th>
-      <th scope="col">contraseña</th>
+  <tr>
+  <th scope="col">#</th>
+      <th scope="col">Correo</th>
+      <th scope="col">Usuario</th>
+      <th scope="col">Operación</th>
       <th scope="col"></th>
-      <th scope="col"></th>
-      <th scope="col"></th>
-     
     </tr>
+    
+    <?php
+    $query = "SELECT * FROM usuario";
+    $resultado = $conexion->query($query);
+    
+    
+    
+    while($mostrar=mysqli_fetch_array($resultado)){
+    ?>
+
+   
   </thead>
   <tbody>
-    <?php foreach($conexion ->query('SELECT * FROM usuario')as $row )?>
     <tr>
-        <td><?php echo $row['id'];?></td>
-        <td><?php echo $row['nombre'];?></td>
-        <td><?php echo $row['apellido'];?></td>
-        <td><?php echo $row['usuario'];?></td>
-        <td><?php echo $row['pwd'];?></td>
-        <td><?php echo $row['mail'];?></td>
-        <td><a type="button" class="btn btn-outline-danger" href="eliminar.php?id=<?php echo $row['id'];?>">Eliminar.</a></td>
-        <td><a type="button" class="btn btn-outline-danger" href="modificar.php?id=<?php echo $row['id'];?>">Modificar.</a></td>
-    </tr>       
+        <td scope="row"><input name="id" value="<?php echo $mostrar['id']?>" ></td>
+        <td><input type="mail" name="correo" value="<?php echo $mostrar['mail']?>"></td>
+        <td><input type="text" name="usuario" value="<?php echo $mostrar['usuario']?>"></td>
+        <td><input type="password" name="pwd" value="<?php echo $mostrar['pwd']?>"></td>
+        <td><input type="text" name="nombre" value="<?php echo $mostrar['nombre']?>"></td>
+        <td><input type="text" name="apellido" value="<?php echo $mostrar['apellido']?>"></td>
+
+        <td><button type="submit" value="Actualizar"  class="btn btn-outline-success">ACTUALIZAR</button></td>
+
+       </tr>
+    <?php 
+    }
+    ?>
   </tbody>
+  </form>
 </table>
     </center >
 </body>
